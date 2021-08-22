@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <title>Chat: Twilio Chat App</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
+    <link rel="stylesheet" type="text/css" href="../styles/chat.css" />
+</head>
+
+<body>
+    <div class="side">
+        <div class="title">
+            <h2>Conversations</h2>
+        </div>
+        <button class="conversation">
+            <h3>First Conversation</h3>
+        </button>
+    </div>
+    <div class="main">
+        <div class="title">
+            <h2>Chat</h2>
+        </div>
+        <div id="messages">
+            <div class="left-message">
+                <div class="message">
+                    <p class="username">Test Apple</p>
+                    Hello
+                </div>
+                <p class="timestamp">6/4/2020 1:35PM</p>
+            </div>
+            <div class="right-message tri-right left-top">
+                <div class="message">
+                    <p class="username">Test Pizza</p>
+                    Hello
+                </div>
+                <p class="timestamp">6/4/2020 1:35PM</p>
+            </div>
+            <div class="right-message tri-right left-top">
+                <div class="message">
+                    <p class="username">Test Pizza</p>
+                    If you reply in the demo application browser, you'll receive the message as a text on your phone.
+                    Notice how all of this routing between the two channels (SMS and chat) is done automatically on your
+                    behalf. Three REST requests in, and you have a working use-case, congratulations!
+                </div>
+                <p class="timestamp">6/4/2020 1:35PM</p>
+            </div>
+            <div class="left-message tri-right left-top">
+                <div class="message">
+                    <p class="username">Test Apple</p>
+                    If you reply in the demo application browser, you'll receive the message as a text on your phone.
+                    Notice how all of this routing between the two channels (SMS and chat) is done automatically on your
+                    behalf. Three REST requests in, and you have a working use-case, congratulations!
+                </div>
+                <p class="timestamp">6/4/2020 1:35PM</p>
+            </div>
+        </div>
+        <div id="message-input">
+            <textarea></textarea>
+            <button>
+                <h3>Submit</h3>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>
