@@ -1,0 +1,130 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.side {
+    flex-grow: 2;
+    border-right: 1px solid lightgrey;
+    display: flex;
+    flex-direction: column;
+}
+
+.conversation {
+    background: white;
+    border: none;
+    text-align: left;
+    padding-left: 2em;
+    border-bottom: .5px solid #E9ECEF;
+}
+
+.conversation:hover {
+    background: #212529;
+    color: white;
+}
+
+.main {
+    flex-grow: 4;
+    background-image: radial-gradient(lightgrey 1px, transparent 0);
+    background-size: 20px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    margin: 0;
+    background-color: white;
+    border-bottom: 1px solid lightgrey;
+    padding: 1em;
+}
+
+.title h2 {
+    margin: 0;
+}
+
+#messages {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+#message-input {
+    background: white;
+    min-height: 10vh;
+    border-top: 1px solid lightgrey;
+    display: flex;
+    padding: 1em;
+}
+
+#message-input textarea {
+    border: 1px solid lightgrey;
+    flex-grow: 1;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    padding: .4em;
+    font-size: 1em;
+}
+
+#message-input button {
+    border: 1px solid lightgrey;
+    background: white;
+    width: 7vw;
+    margin-left: 1vw;
+    border-radius: 5px;
+}
+
+#message-input button:hover {
+    border: none;
+    background: #212529;
+    color: white;
+}
+
+.right-message, .left-message {
+    display: flex;
+    margin: .5em;
+    flex-direction: column;
+}
+
+.right-message {
+    align-items: flex-end;
+}
+
+.right-message .message {
+    background: #495057;
+    color: white;
+}
+
+.left-message {
+    align-items: flex-start;
+}
+
+.left-message .message {
+    background: #fdfdfd;
+}
+
+.message {
+    padding: .8em;
+    background: white;
+    border: 1px solid lightgrey;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    min-width: 15vw;
+    max-width: 45vw;
+}
+
+.timestamp {
+    font-size: .8em;
+    color: grey;
+    margin: .4em .8em .4em .8em;
+}
+
+.username {
+    margin: 0 0 .4em 0;
+    font-weight: bold;
+    font-size: .9em;
+}
