@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/zaracooper/twilio-vanilla-js-chat-app/issues"
   },
-  "homepage": "https://github.com/zaracooper/twilio-vanilla-js-chat-app#readme"
+  "homepage": "https://github.com/zaracooper/twilio-vanilla-js-chat-app#readme",
+  "dependencies": {
+    "@twilio/conversations": "^1.2.3"
+  }
 }
