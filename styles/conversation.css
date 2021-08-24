@@ -4,14 +4,10 @@ html, body {
     justify-content: center;
 }
 
-.login {
+.create-convo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 2em;
-}
-
-.email-label {
-    margin-top: 1.5em;
 }
