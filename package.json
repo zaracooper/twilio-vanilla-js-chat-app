@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/zaracooper/twilio-vanilla-js-chat-app#readme",
   "dependencies": {
-    "@twilio/conversations": "^1.2.3"
+    "@twilio/conversations": "^1.2.3",
+    "axios": "^0.21.1"
   }
 }

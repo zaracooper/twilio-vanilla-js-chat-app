@@ -28,6 +28,7 @@ html, body {
     min-height: 4.5vh;
     min-width: 20vw;
     font-size: 0.9em;
+    padding: .5em;
 }
 
 .title {

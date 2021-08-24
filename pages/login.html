@@ -13,14 +13,18 @@
     <div class="card">
         <p class="title">Chat Login</p>
         <p class="subtitle">Enter your display name and email address</p>
-        <form class="login">
+        <form id="loginForm" name="loginForm" class="login">
             <label class="input-label" for="display-name">Display Name</label>
             <input class="input" type="text" id="display-name" name="display-name">
             <label class="input-label email-label" for="email">Email Address</label>
             <input class="input" type="text" id="email" name="email">
-            <input class="submit-button" type="submit" value="Submit">
+            <button type="submit" class="submit-button" onclick="login();return false">Submit</button>
         </form>
     </div>
 </body>
+<footer>
+    <script src="../scripts/login.js"></script>
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+</footer>
 
 </html>
