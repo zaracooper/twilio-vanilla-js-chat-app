@@ -16,7 +16,7 @@
     </div>
     <div class="main">
         <div>
-            <p class="title">Chat</p>
+            <p id="chat-title" class="title">Chat</p>
         </div>
         <div id="messages">
             <div class="left-message">
@@ -52,12 +52,12 @@
                 <p class="timestamp">6/4/2020 1:35PM</p>
             </div>
         </div>
-        <div id="message-input">
-            <textarea></textarea>
-            <button>
+        <form id="message-input">
+            <textarea id="chat-message" name="chat-message"></textarea>
+            <button id="submitMessage" type="submit" onclick="sendMessage();return false">
                 <h3>Submit</h3>
             </button>
-        </div>
+        </form>
     </div>
 </body>
 
