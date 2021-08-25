@@ -62,3 +62,9 @@ html, body {
 .submit-button:hover {
     background: blue;
 }
+
+.submit-button:disabled {
+    background-color: gray;
+    color: white;
+    cursor: wait;
+}

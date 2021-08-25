@@ -1,10 +1,15 @@
 function createConversation() {
     let convoForm = document.getElementById('convoForm');
     let formData = new FormData(convoForm);
+
     let body = {};
     for (const entry of formData.entries()) {
         { body[entry[0]] = entry[1] };
     }
+
+    let submitBtn = document.getElementById('submitConvo');
+    submitBtn.innerHTML = "Creating..."
+    submitBtn.disabled = true;
 
     axios.request({
         url: '/api/conversations',
@@ -14,9 +19,9 @@ function createConversation() {
         data: body
     })
         .then(function () {
-            location.href = "/pages/chat.html";
+            location.href = '/pages/chat.html';
         })
         .catch(function () {
-            location.href = "/pages/error.html";
+            location.href = '/pages/error.html';
         });
 }
