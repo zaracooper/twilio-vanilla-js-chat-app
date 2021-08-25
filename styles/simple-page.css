@@ -4,7 +4,7 @@ html, body {
     justify-content: center;
 }
 
-.login {
+.centered-content {
     display: flex;
     flex-direction: column;
     justify-content: center;

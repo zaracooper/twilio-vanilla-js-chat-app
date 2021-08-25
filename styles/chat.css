@@ -7,6 +7,10 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.title {
+    padding: .5em .5em .5em .7em !important;
+}
+
 .side {
     flex-grow: 2;
     border-right: 1px solid lightgrey;
