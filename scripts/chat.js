@@ -1,4 +1,4 @@
-window.twilioChat = {};
+window.twilioChat = twilioChat || {};
 
 async function initClient() {
     try {
@@ -9,6 +9,7 @@ async function initClient() {
             withCredentials: true
         });
 
+        twilioChat.username = response.data.username;
         twilioChat.client = await Twilio.Conversations.Client.create(response.data.token);
 
         let conversations = await twilioChat.client.getSubscribedConversations();

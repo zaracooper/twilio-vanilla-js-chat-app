@@ -1,3 +1,5 @@
+window.twilioChat = twilioChat || {};
+
 function createConversation() {
     let convoForm = document.getElementById('convoForm');
     let formData = new FormData(convoForm);
@@ -19,6 +21,7 @@ function createConversation() {
         data: body
     })
         .then(function () {
+            twilioChat.username = body.username;
             location.href = '/pages/chat.html';
         })
         .catch(function () {
