@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <title>Login: Twilio Chat App</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
+
+    <link rel="stylesheet" type="text/css" href="../styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/simple-page.css" />
+</head>
+
+<body>
+    <div class="card">
+        <p class="title">Chat Login</p>
+        <p class="subtitle">Enter your display name</p>
+        <form id="loginForm" name="loginForm" class="centered-content">
+            <input class="input" type="text" id="username" name="username">
+            <button type="submit" class="submit-button" onclick="login();return false">Submit</button>
+        </form>
+    </div>
+</body>
+<footer>
+    <script src="../scripts/login.js"></script>
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+</footer>
+
+</html>

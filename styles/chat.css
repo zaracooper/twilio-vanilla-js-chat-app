@@ -160,5 +160,6 @@ html, body {
 
 #invite-button {
     margin: 1em;
-    height: 2.3em;
+    max-height: 3.2em;
+    padding: .4em
 }
