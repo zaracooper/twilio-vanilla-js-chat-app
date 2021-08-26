@@ -14,7 +14,7 @@ html, body {
 }
 
 .card {
-    padding: 1em;
+    padding: 2em 1em 2em 1em;
     min-width: 40vw;
     min-height: 40vh;
     text-align: center;
@@ -32,7 +32,7 @@ html, body {
 }
 
 .title {
-    font-size: 2.5em;
+    font-size: 2.3em;
     margin: .4em 0 .2em 0;
     font-weight: bold;
 }
@@ -45,7 +45,7 @@ html, body {
 }
 
 .input-label {
-    margin: 0.4em 0 0.4em 0;
+    margin: 0.7em 0 0.4em 0;
 }
 
 .submit-button {

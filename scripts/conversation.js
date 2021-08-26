@@ -1,4 +1,4 @@
-window.twilioChat = twilioChat || {};
+window.twilioChat = window.twilioChat || {};
 
 function createConversation() {
     let convoForm = document.getElementById('convoForm');

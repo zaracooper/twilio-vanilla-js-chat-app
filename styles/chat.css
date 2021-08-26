@@ -12,7 +12,7 @@ html, body {
 }
 
 .side {
-    flex-grow: 2;
+    width: 35vw;
     border-right: 1px solid lightgrey;
     display: flex;
     flex-direction: column;
@@ -32,11 +32,12 @@ html, body {
 }
 
 .main {
-    flex-grow: 4;
+    width: 65vw;
     background-image: radial-gradient(lightgrey 1px, transparent 0);
     background-size: 20px 20px;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .title {
@@ -55,6 +56,7 @@ html, body {
     display: flex;
     flex-direction: column;
     padding: 1em;
+    overflow-y: auto;
 }
 
 #message-input {

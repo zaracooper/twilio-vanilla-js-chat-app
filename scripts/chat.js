@@ -1,4 +1,4 @@
-window.twilioChat = twilioChat || {};
+window.twilioChat = window.twilioChat || {};
 
 async function initClient() {
     try {
@@ -9,30 +9,29 @@ async function initClient() {
             withCredentials: true
         });
 
-        twilioChat.username = response.data.username;
-        twilioChat.client = await Twilio.Conversations.Client.create(response.data.token);
+        window.twilioChat.username = response.data.username;
+        window.twilioChat.client = await Twilio.Conversations.Client.create(response.data.token);
 
-        let conversations = await twilioChat.client.getSubscribedConversations();
+        let conversations = await window.twilioChat.client.getSubscribedConversations();
 
-        let button;
-        let h3;
+        let conversationCont, conversationName;
 
         const sideNav = document.getElementById('side-nav');
 
         for (const conv of conversations.items) {
-            button = document.createElement('button');
-            button.classList.add('conversation');
-            button.id = conv.sid;
-            button.value = conv.sid;
-            button.onclick = async () => {
+            conversationCont = document.createElement('button');
+            conversationCont.classList.add('conversation');
+            conversationCont.id = conv.sid;
+            conversationCont.value = conv.sid;
+            conversationCont.onclick = async () => {
                 await setConversation(conv.sid, conv.channelState.friendlyName);
             };
 
-            h3 = document.createElement('h3');
-            h3.innerHTML = conv.channelState.friendlyName;
+            conversationName = document.createElement('h3');
+            conversationName.innerHTML = conv.channelState.friendlyName;
 
-            button.appendChild(h3);
-            sideNav.appendChild(button);
+            conversationCont.appendChild(conversationName);
+            sideNav.appendChild(conversationCont);
         }
     }
     catch {
@@ -53,14 +52,14 @@ async function sendMessage() {
 };
 
 async function setConversation(sid, name) {
-    twilioChat.selectedConvSid = sid;
+    window.twilioChat.selectedConvSid = sid;
     document.getElementById('chat-title').innerHTML = name;
 
     await getMessages();
 };
 
 async function getCurrentConversation() {
-    return await twilioChat.client.getConversationBySid(twilioChat.selectedConvSid);
+    return await window.twilioChat.client.getConversationBySid(window.twilioChat.selectedConvSid);
 }
 
 async function getMessages() {
@@ -68,7 +67,39 @@ async function getMessages() {
 
     let messages = await conv.getMessages();
 
-    console.log(messages);
+    let cont, msgCont, msgAuthor, timestamp;
+
+    const chatArea = document.getElementById('messages');
+
+    chatArea.replaceChildren();
+
+    for (const msg of messages.items) {
+        cont = document.createElement('div');
+        if (msg.state.author == window.twilioChat.username) {
+            cont.classList.add('right-message');
+        } else {
+            cont.classList.add('left-message');
+        }
+
+        msgCont = document.createElement('div');
+        msgCont.classList.add('message');
+
+        msgAuthor = document.createElement('p');
+        msgAuthor.classList.add('username');
+        msgAuthor.innerHTML = msg.state.author;
+
+        timestamp = document.createElement('p');
+        timestamp.classList.add('timestamp');
+        timestamp.innerHTML = msg.state.timestamp;
+
+        msgCont.appendChild(msgAuthor);
+        msgCont.innerHTML += msg.state.body;
+
+        cont.appendChild(msgCont);
+        cont.appendChild(timestamp);
+
+        chatArea.appendChild(cont);
+    }
 };
 
 initClient();
