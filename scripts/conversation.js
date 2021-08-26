@@ -12,6 +12,7 @@ function createConversation() {
     let submitBtn = document.getElementById('submitConvo');
     submitBtn.innerHTML = "Creating..."
     submitBtn.disabled = true;
+    submitBtn.style.cursor = 'wait';
 
     axios.request({
         url: '/api/conversations',

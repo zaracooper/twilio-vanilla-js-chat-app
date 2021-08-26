@@ -53,6 +53,8 @@ async function sendMessage() {
 
 async function setConversation(sid, name) {
     window.twilioChat.selectedConvSid = sid;
+    window.twilioChat.selectedConvName = name;
+
     document.getElementById('chat-title').innerHTML = '+ ' + name;
 
     document.getElementById('loading-chat').style.display = 'flex';
@@ -122,6 +124,14 @@ function addMessagesToChatArea(messages, clearMessages) {
     }
 
     chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+async function inviteFriend() {
+    const link = `http://localhost:3000/pages/login.html?sid=${window.twilioChat.selectedConvSid}&name=${window.twilioChat.selectedConvName}`;
+
+    await navigator.clipboard.writeText(link);
+
+    alert(`The link below has been copied to your clipboard.\n\n${link}\n\nYou can invite a friend to chat by sending them the above link.`);
 }
 
 initClient();
