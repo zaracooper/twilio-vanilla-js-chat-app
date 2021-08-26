@@ -7,10 +7,6 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.title {
-    padding: .5em .5em .5em .7em !important;
-}
-
 .side {
     width: 30vw;
     border-right: 1px solid lightgrey;
@@ -50,7 +46,7 @@ html, body {
     margin: 0;
     background-color: white;
     border-bottom: 1px solid lightgrey;
-    padding: 1em;
+    padding: .5em .5em .5em .7em;
     font-weight: normal;
 }
 
@@ -91,7 +87,7 @@ html, body {
     font-size: 1em;
 }
 
-#message-input button {
+.chat-button {
     border: 1px solid lightgrey;
     background: white;
     width: 7vw;
@@ -99,7 +95,7 @@ html, body {
     border-radius: 5px;
 }
 
-#message-input button:hover:enabled {
+.chat-button:hover:enabled {
     border: none;
     background: #212529;
     color: white;
@@ -148,4 +144,21 @@ html, body {
     margin: 0 0 .4em 0;
     font-weight: bold;
     font-size: .9em;
+}
+
+#chat-nav {
+    display: flex;
+    background: white;
+    border-bottom: 1px solid lightgrey;
+    align-items: center;
+}
+
+#chat-title {
+    flex-grow: 1;
+    border-bottom: none;
+}
+
+#invite-button {
+    margin: 1em;
+    height: 2.3em;
 }

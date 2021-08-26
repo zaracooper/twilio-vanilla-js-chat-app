@@ -58,6 +58,7 @@ async function setConversation(sid, name) {
     document.getElementById('loading-chat').style.display = 'flex';
     document.getElementById('messages').style.display = 'none';
     document.getElementById('submitMessage').disabled = true;
+    document.getElementById('invite-button').disabled = true;
 
     await getMessages();
 };
@@ -78,6 +79,7 @@ async function getMessages() {
     window.twilioChat.selectedConversation.on('messageAdded', msg => addMessagesToChatArea([msg], false));
 
     document.getElementById('submitMessage').disabled = false;
+    document.getElementById('invite-button').disabled = false;
 };
 
 function addMessagesToChatArea(messages, clearMessages) {
