@@ -29,7 +29,7 @@ async function initClient() {
             };
 
             conversationName = document.createElement('h3');
-            conversationName.innerHTML = conv.channelState.friendlyName;
+            conversationName.innerHTML = `💬 ${conv.channelState.friendlyName}`;
 
             conversationCont.appendChild(conversationName);
             sideNav.appendChild(conversationCont);
@@ -132,6 +132,24 @@ async function inviteFriend() {
     await navigator.clipboard.writeText(link);
 
     alert(`The link below has been copied to your clipboard.\n\n${link}\n\nYou can invite a friend to chat by sending them the above link.`);
+}
+
+function logout(logoutButton) {
+    logoutButton.disabled = true;
+    logoutButton.style.cursor = 'wait';
+
+    axios.request({
+        url: '/auth/token',
+        baseURL: 'http://localhost:8000',
+        method: 'delete',
+        withCredentials: true
+    })
+        .then(() => {
+            location.href = '/pages/conversation.html';
+        })
+        .catch(() => {
+            location.href = '/pages/error.html';
+        });
 }
 
 initClient();
