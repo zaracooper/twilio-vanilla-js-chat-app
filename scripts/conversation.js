@@ -20,11 +20,11 @@ function createConversation() {
         withCredentials: true,
         data: body
     })
-        .then(function () {
+        .then(() => {
             twilioChat.username = body.username;
             location.href = '/pages/chat.html';
         })
-        .catch(function () {
+        .catch(() => {
             location.href = '/pages/error.html';
         });
 }

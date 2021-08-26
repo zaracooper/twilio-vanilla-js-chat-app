@@ -14,7 +14,7 @@ html, body {
 }
 
 .card {
-    padding: 2em 1em 2em 1em;
+    padding: 2em;
     min-width: 40vw;
     min-height: 40vh;
     text-align: center;
@@ -32,7 +32,7 @@ html, body {
 }
 
 .title {
-    font-size: 2.3em;
+    font-size: 2.1em;
     margin: .4em 0 .2em 0;
     font-weight: bold;
 }

@@ -12,10 +12,16 @@ html, body {
 }
 
 .side {
-    width: 35vw;
+    width: 30vw;
     border-right: 1px solid lightgrey;
     display: flex;
     flex-direction: column;
+}
+
+#loading-msg {
+    font-weight: 1;
+    padding: .5em 2em;
+    cursor: wait;
 }
 
 .conversation {
@@ -32,7 +38,7 @@ html, body {
 }
 
 .main {
-    width: 65vw;
+    width: 70vw;
     background-image: radial-gradient(lightgrey 1px, transparent 0);
     background-size: 20px 20px;
     display: flex;
@@ -45,6 +51,7 @@ html, body {
     background-color: white;
     border-bottom: 1px solid lightgrey;
     padding: 1em;
+    font-weight: normal;
 }
 
 .title h2 {
@@ -57,6 +64,14 @@ html, body {
     flex-direction: column;
     padding: 1em;
     overflow-y: auto;
+}
+
+#loading-chat {
+    flex-grow: 1;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: wait;
 }
 
 #message-input {
@@ -84,7 +99,7 @@ html, body {
     border-radius: 5px;
 }
 
-#message-input button:hover {
+#message-input button:hover:enabled {
     border: none;
     background: #212529;
     color: white;

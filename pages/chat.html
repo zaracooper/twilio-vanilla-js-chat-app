@@ -13,16 +13,20 @@
         <div>
             <p class="title">Conversations</p>
         </div>
+        <p id="loading-msg">Loading conversations...</p>
     </div>
     <div id="chat-area" class="main">
         <div>
             <p id="chat-title" class="title">Chat</p>
         </div>
+        <div id="loading-chat">
+            <h3>Loading messages...</h3>
+        </div>
         <div id="messages">
         </div>
         <form id="message-input">
             <textarea id="chat-message" name="chat-message"></textarea>
-            <button id="submitMessage" type="submit" onclick="sendMessage();return false">
+            <button id="submitMessage" type="submit" onclick="sendMessage();return false" disabled>
                 <h3>Submit</h3>
             </button>
         </form>

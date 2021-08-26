@@ -17,8 +17,9 @@ async function initClient() {
         let conversationCont, conversationName;
 
         const sideNav = document.getElementById('side-nav');
+        sideNav.removeChild(document.getElementById('loading-msg'));
 
-        for (const conv of conversations.items) {
+        for (let conv of conversations.items) {
             conversationCont = document.createElement('button');
             conversationCont.classList.add('conversation');
             conversationCont.id = conv.sid;
@@ -43,37 +44,54 @@ async function sendMessage() {
     let messageForm = document.getElementById('message-input');
     let messageData = new FormData(messageForm);
 
-    const msg = messageData.get('chat-message') || 'Hello';
+    const msg = messageData.get('chat-message');
 
-    const conv = await getCurrentConversation();
-    await conv.sendMessage(msg).then(() => {
+    await window.twilioChat.selectedConversation.sendMessage(msg).then(() => {
         document.getElementById('chat-message').value = '';
     });
 };
 
 async function setConversation(sid, name) {
     window.twilioChat.selectedConvSid = sid;
-    document.getElementById('chat-title').innerHTML = name;
+    document.getElementById('chat-title').innerHTML = '+ ' + name;
+
+    document.getElementById('loading-chat').style.display = 'flex';
+    document.getElementById('messages').style.display = 'none';
+    document.getElementById('submitMessage').disabled = true;
 
     await getMessages();
 };
 
 async function getCurrentConversation() {
-    return await window.twilioChat.client.getConversationBySid(window.twilioChat.selectedConvSid);
+    window.twilioChat.selectedConversation = await window.twilioChat.client.getConversationBySid(window.twilioChat.selectedConvSid);
+
+    return window.twilioChat.selectedConversation;
 }
 
 async function getMessages() {
-    const conv = await getCurrentConversation();
+    await getCurrentConversation();
 
-    let messages = await conv.getMessages();
+    let messages = await window.twilioChat.selectedConversation.getMessages();
 
+    addMessagesToChatArea(messages.items, true);
+
+    window.twilioChat.selectedConversation.on('messageAdded', msg => addMessagesToChatArea([msg], false));
+
+    document.getElementById('submitMessage').disabled = false;
+};
+
+function addMessagesToChatArea(messages, clearMessages) {
     let cont, msgCont, msgAuthor, timestamp;
 
     const chatArea = document.getElementById('messages');
 
-    chatArea.replaceChildren();
+    if (clearMessages) {
+        document.getElementById('loading-chat').style.display = 'none';
+        chatArea.style.display = 'flex';
+        chatArea.replaceChildren();
+    }
 
-    for (const msg of messages.items) {
+    for (const msg of messages) {
         cont = document.createElement('div');
         if (msg.state.author == window.twilioChat.username) {
             cont.classList.add('right-message');
@@ -100,6 +118,8 @@ async function getMessages() {
 
         chatArea.appendChild(cont);
     }
-};
+
+    chatArea.scrollTop = chatArea.scrollHeight;
+}
 
 initClient();
