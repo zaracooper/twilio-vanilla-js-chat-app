@@ -40,48 +40,54 @@ async function initClient() {
     }
 };
 
-async function sendMessage() {
+function sendMessage() {
+    let submitBtn = document.getElementById('submitMessage');
+    submitBtn.disabled = true;
+
     let messageForm = document.getElementById('message-input');
     let messageData = new FormData(messageForm);
 
     const msg = messageData.get('chat-message');
 
-    await window.twilioChat.selectedConversation.sendMessage(msg).then(() => {
-        document.getElementById('chat-message').value = '';
-    });
+    window.twilioChat.selectedConversation.sendMessage(msg)
+        .then(() => {
+            document.getElementById('chat-message').value = '';
+            submitBtn.disabled = false;
+        })
+        .catch(() => {
+            showError('sending your message');
+            submitBtn.disabled = false;
+        });
 };
 
 async function setConversation(sid, name) {
-    window.twilioChat.selectedConvSid = sid;
-    window.twilioChat.selectedConvName = name;
+    try {
+        window.twilioChat.selectedConvSid = sid;
 
-    document.getElementById('chat-title').innerHTML = '+ ' + name;
+        document.getElementById('chat-title').innerHTML = '+ ' + name;
 
-    document.getElementById('loading-chat').style.display = 'flex';
-    document.getElementById('messages').style.display = 'none';
-    document.getElementById('submitMessage').disabled = true;
-    document.getElementById('invite-button').disabled = true;
+        document.getElementById('loading-chat').style.display = 'flex';
+        document.getElementById('messages').style.display = 'none';
 
-    await getMessages();
-};
+        let submitButton = document.getElementById('submitMessage')
+        submitButton.disabled = true;
 
-async function getCurrentConversation() {
-    window.twilioChat.selectedConversation = await window.twilioChat.client.getConversationBySid(window.twilioChat.selectedConvSid);
+        let inviteButton = document.getElementById('invite-button')
+        inviteButton.disabled = true;
 
-    return window.twilioChat.selectedConversation;
-}
+        window.twilioChat.selectedConversation = await window.twilioChat.client.getConversationBySid(window.twilioChat.selectedConvSid);
 
-async function getMessages() {
-    await getCurrentConversation();
+        const messages = await window.twilioChat.selectedConversation.getMessages();
 
-    let messages = await window.twilioChat.selectedConversation.getMessages();
+        addMessagesToChatArea(messages.items, true);
 
-    addMessagesToChatArea(messages.items, true);
+        window.twilioChat.selectedConversation.on('messageAdded', msg => addMessagesToChatArea([msg], false));
 
-    window.twilioChat.selectedConversation.on('messageAdded', msg => addMessagesToChatArea([msg], false));
-
-    document.getElementById('submitMessage').disabled = false;
-    document.getElementById('invite-button').disabled = false;
+        submitButton.disabled = false;
+        inviteButton.disabled = false;
+    } catch {
+        showError('loading the conversation you selected');
+    }
 };
 
 function addMessagesToChatArea(messages, clearMessages) {
@@ -127,11 +133,15 @@ function addMessagesToChatArea(messages, clearMessages) {
 }
 
 async function inviteFriend() {
-    const link = `http://localhost:3000/pages/login.html?sid=${window.twilioChat.selectedConvSid}&name=${window.twilioChat.selectedConvName}`;
+    try {
+        const link = `http://localhost:3000/pages/login.html?sid=${window.twilioChat.selectedConvSid}`;
 
-    await navigator.clipboard.writeText(link);
+        await navigator.clipboard.writeText(link);
 
-    alert(`The link below has been copied to your clipboard.\n\n${link}\n\nYou can invite a friend to chat by sending them the above link.`);
+        alert(`The link below has been copied to your clipboard.\n\n${link}\n\nYou can invite a friend to chat by sending it to them.`);
+    } catch {
+        showError('preparing your chat invite');
+    }
 }
 
 function logout(logoutButton) {
@@ -150,6 +160,15 @@ function logout(logoutButton) {
         .catch(() => {
             location.href = '/pages/error.html';
         });
+}
+
+function hideError() {
+    document.getElementById('error-message').style.display = 'none';
+}
+
+function showError(msg) {
+    document.getElementById('error-message').style.display = 'flex';
+    document.getElementById('error-text').innerHTML = `There was a problem ${msg ? msg : 'fulfilling your request'}.`;
 }
 
 initClient();

@@ -9,35 +9,44 @@
 </head>
 
 <body>
-    <div class="side">
-        <div>
-            <p class="title">Conversations</p>
-        </div>
-        <div id="side-nav">
-            <p id="loading-msg">Loading conversations...</p>
-        </div>
+    <div id="error-message">
+        <p id="error-text">
+            There was a problem fulfilling your request.
+        </p>
+        <button id="error-button" onclick="hideError(); return false">X</button>
     </div>
-    <div id="chat-area" class="main">
-        <div id="chat-nav">
-            <p id="chat-title" class="title">Chat</p>
-            <button id="invite-button" class="chat-button" onclick="inviteFriend();return false" disabled>
-                Invite Friend
-            </button>
-            <button id="logout-button" class="chat-button" type="submit" onclick="logout(this);return false">
-                Logout
-            </button>
+    <div class="container">
+        <div class="side">
+            <div>
+                <p class="title">Conversations</p>
+            </div>
+            <div id="side-nav">
+                <p id="loading-msg">Loading conversations...</p>
+            </div>
         </div>
-        <div id="loading-chat">
-            <h3>Loading messages...</h3>
+        <div id="chat-area" class="main">
+            <div id="chat-nav">
+                <p id="chat-title" class="title">Chat</p>
+                <button id="invite-button" class="chat-button" onclick="inviteFriend();return false" disabled>
+                    Invite Friend
+                </button>
+                <button id="logout-button" class="chat-button" type="submit" onclick="logout(this);return false">
+                    Logout
+                </button>
+            </div>
+            <div id="loading-chat">
+                <h3>Loading messages...</h3>
+            </div>
+            <div id="messages">
+            </div>
+            <form id="message-input">
+                <textarea id="chat-message" name="chat-message"></textarea>
+                <button id="submitMessage" class="chat-button" type="submit" onclick="sendMessage();return false"
+                    disabled>
+                    <h3>Submit</h3>
+                </button>
+            </form>
         </div>
-        <div id="messages">
-        </div>
-        <form id="message-input">
-            <textarea id="chat-message" name="chat-message"></textarea>
-            <button id="submitMessage" class="chat-button" type="submit" onclick="sendMessage();return false" disabled>
-                <h3>Submit</h3>
-            </button>
-        </form>
     </div>
 </body>
 

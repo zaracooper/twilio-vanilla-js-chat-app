@@ -4,7 +4,7 @@ function login() {
     const convParams = new URLSearchParams(window.location.search);
     const conv = Object.fromEntries(convParams.entries());
 
-    if (conv.sid && conv.name) {
+    if (conv.sid) {
         let submitBtn = document.getElementById('login-button');
         submitBtn.innerHTML = 'Logging in...';
         submitBtn.disabled = true;
@@ -27,9 +27,8 @@ function login() {
             .then(() => {
                 location.href = '/pages/chat.html';
             })
-            .catch((error) => {
-                console.log(error);
-                // location.href = "/pages/error.html";
+            .catch(() => {
+                location.href = '/pages/error.html';
             });
     } else {
         location.href = '/pages/conversation.html';
