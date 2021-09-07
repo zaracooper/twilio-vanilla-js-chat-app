@@ -11,3 +11,15 @@ html, body {
     align-items: center;
     margin: 2em;
 }
+
+#go-home, #go-home:hover {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-icon {
+    font-size: 7em;
+    margin: 0;
+}
