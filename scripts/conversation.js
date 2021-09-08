@@ -22,7 +22,7 @@ function createConversation() {
         data: body
     })
         .then(() => {
-            twilioChat.username = body.username;
+            window.twilioChat.username = body.username;
             location.href = '/pages/chat.html';
         })
         .catch(() => {

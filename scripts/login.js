@@ -1,5 +1,3 @@
-window.twilioChat = window.twilioChat || {};
-
 function login() {
     const convParams = new URLSearchParams(window.location.search);
     const conv = Object.fromEntries(convParams.entries());

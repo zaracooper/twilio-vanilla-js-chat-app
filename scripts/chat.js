@@ -36,7 +36,7 @@ async function initClient() {
         }
     }
     catch {
-        location.href = '/pages/conversation.html';
+        location.href = '/pages/error.html';
     }
 };
 
