@@ -1,4 +1,4 @@
-# Twilio Vanilla JS Chat App
+# Twilio Conversations Vanilla JS Chat App
 1. Install **http-server**:
 
     `npm install -g http-server`
