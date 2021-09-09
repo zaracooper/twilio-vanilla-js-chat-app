@@ -1,8 +1,8 @@
 # Twilio Vanilla JS Chat App
-1. Install **lite-server**:
+1. Install **http-server**:
 
-    `npm install -g lite-server`
+    `npm install -g http-server`
 
-2. Run **lite-server**:
+2. Run **http-server**:
 
-    `lite-server`
+    `http-server -p 3000`
