@@ -42,8 +42,8 @@ twilioDemo.chat.initClient = async () => {
         }
 
     }
-    catch (err) {
-        location.href = '/pages/error.html';
+    catch {
+        location.href = '/pages/conversation.html';
     }
 };
 
