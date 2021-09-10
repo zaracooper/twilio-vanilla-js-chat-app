@@ -1,46 +1,53 @@
-window.twilioChat = window.twilioChat || {};
+var twilioDemo = twilioDemo || {};
 
-async function initClient() {
+twilioDemo.chat = twilioDemo.chat || {
+    username: '',
+    client: '',
+    selectedConversation: '',
+    selectedConvSid: ''
+};
+
+twilioDemo.chat.initClient = async () => {
     try {
-        const response = await axios.request({
-            url: '/auth/token',
-            baseURL: 'http://localhost:8000',
-            method: 'get',
-            withCredentials: true
-        });
+        twilioDemo.chat.username = localStorage.getItem('twilioChatUsername');
+        const token = localStorage.getItem('twilioChatToken');
 
-        window.twilioChat.username = response.data.username;
-        window.twilioChat.client = await Twilio.Conversations.Client.create(response.data.token);
+        if (twilioDemo.chat.username && token) {
+            twilioDemo.chat.client = await Twilio.Conversations.Client.create(token);
 
-        let conversations = await window.twilioChat.client.getSubscribedConversations();
+            let conversations = await twilioDemo.chat.client.getSubscribedConversations();
 
-        let conversationCont, conversationName;
+            let conversationCont, conversationName;
 
-        const sideNav = document.getElementById('side-nav');
-        sideNav.removeChild(document.getElementById('loading-msg'));
+            const sideNav = document.getElementById('side-nav');
+            sideNav.removeChild(document.getElementById('loading-msg'));
 
-        for (let conv of conversations.items) {
-            conversationCont = document.createElement('button');
-            conversationCont.classList.add('conversation');
-            conversationCont.id = conv.sid;
-            conversationCont.value = conv.sid;
-            conversationCont.onclick = async () => {
-                await setConversation(conv.sid, conv.channelState.friendlyName);
-            };
+            for (let conv of conversations.items) {
+                conversationCont = document.createElement('button');
+                conversationCont.classList.add('conversation');
+                conversationCont.id = conv.sid;
+                conversationCont.value = conv.sid;
+                conversationCont.onclick = async () => {
+                    await twilioDemo.chat.setConversation(conv.sid, conv.channelState.friendlyName);
+                };
 
-            conversationName = document.createElement('h3');
-            conversationName.innerHTML = `💬 ${conv.channelState.friendlyName}`;
+                conversationName = document.createElement('h3');
+                conversationName.innerHTML = `💬 ${conv.channelState.friendlyName}`;
 
-            conversationCont.appendChild(conversationName);
-            sideNav.appendChild(conversationCont);
+                conversationCont.appendChild(conversationName);
+                sideNav.appendChild(conversationCont);
+            }
+        } else {
+            throw 'No token or username set';
         }
+
     }
-    catch {
+    catch (err) {
         location.href = '/pages/error.html';
     }
 };
 
-function sendMessage() {
+twilioDemo.chat.sendMessage = () => {
     let submitBtn = document.getElementById('submitMessage');
     submitBtn.disabled = true;
 
@@ -49,20 +56,20 @@ function sendMessage() {
 
     const msg = messageData.get('chat-message');
 
-    window.twilioChat.selectedConversation.sendMessage(msg)
+    twilioDemo.chat.selectedConversation.sendMessage(msg)
         .then(() => {
             document.getElementById('chat-message').value = '';
             submitBtn.disabled = false;
         })
         .catch(() => {
-            showError('sending your message');
+            twilioDemo.chat.showError('sending your message');
             submitBtn.disabled = false;
         });
 };
 
-async function setConversation(sid, name) {
+twilioDemo.chat.setConversation = async (sid, name) => {
     try {
-        window.twilioChat.selectedConvSid = sid;
+        twilioDemo.chat.selectedConvSid = sid;
 
         document.getElementById('chat-title').innerHTML = '+ ' + name;
 
@@ -75,13 +82,13 @@ async function setConversation(sid, name) {
         let inviteButton = document.getElementById('invite-button')
         inviteButton.disabled = true;
 
-        window.twilioChat.selectedConversation = await window.twilioChat.client.getConversationBySid(window.twilioChat.selectedConvSid);
+        twilioDemo.chat.selectedConversation = await twilioDemo.chat.client.getConversationBySid(twilioDemo.chat.selectedConvSid);
 
-        const messages = await window.twilioChat.selectedConversation.getMessages();
+        const messages = await twilioDemo.chat.selectedConversation.getMessages();
 
-        addMessagesToChatArea(messages.items, true);
+        twilioDemo.chat.addMessagesToChatArea(messages.items, true);
 
-        window.twilioChat.selectedConversation.on('messageAdded', msg => addMessagesToChatArea([msg], false));
+        twilioDemo.chat.selectedConversation.on('messageAdded', msg => twilioDemo.chat.addMessagesToChatArea([msg], false));
 
         submitButton.disabled = false;
         inviteButton.disabled = false;
@@ -90,7 +97,7 @@ async function setConversation(sid, name) {
     }
 };
 
-function addMessagesToChatArea(messages, clearMessages) {
+twilioDemo.chat.addMessagesToChatArea = (messages, clearMessages) => {
     let cont, msgCont, msgAuthor, timestamp;
 
     const chatArea = document.getElementById('messages');
@@ -103,7 +110,7 @@ function addMessagesToChatArea(messages, clearMessages) {
 
     for (const msg of messages) {
         cont = document.createElement('div');
-        if (msg.state.author == window.twilioChat.username) {
+        if (msg.state.author == twilioDemo.chat.username) {
             cont.classList.add('right-message');
         } else {
             cont.classList.add('left-message');
@@ -130,27 +137,27 @@ function addMessagesToChatArea(messages, clearMessages) {
     }
 
     chatArea.scrollTop = chatArea.scrollHeight;
-}
+};
 
-async function inviteFriend() {
+twilioDemo.chat.inviteFriend = async () => {
     try {
-        const link = `http://localhost:3000/pages/login.html?sid=${window.twilioChat.selectedConvSid}`;
+        const link = `http://localhost:3000/pages/login.html?sid=${twilioDemo.chat.selectedConvSid}`;
 
         await navigator.clipboard.writeText(link);
 
         alert(`The link below has been copied to your clipboard.\n\n${link}\n\nYou can invite a friend to chat by sending it to them.`);
     } catch {
-        showError('preparing your chat invite');
+        twilioDemo.chat.showError('preparing your chat invite');
     }
-}
+};
 
-function hideError() {
+twilioDemo.chat.hideError = () => {
     document.getElementById('error-message').style.display = 'none';
-}
+};
 
-function showError(msg) {
+twilioDemo.chat.showError = (msg) => {
     document.getElementById('error-message').style.display = 'flex';
     document.getElementById('error-text').innerHTML = `There was a problem ${msg ? msg : 'fulfilling your request'}.`;
-}
+};
 
-initClient();
+twilioDemo.chat.initClient();

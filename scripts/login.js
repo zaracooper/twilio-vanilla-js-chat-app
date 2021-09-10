@@ -19,10 +19,12 @@ function login() {
             url: `/api/conversations/${conv.sid}/participants`,
             baseURL: 'http://localhost:8000',
             method: 'post',
-            withCredentials: true,
             data: body
         })
-            .then(() => {
+            .then(resp => {
+                localStorage.setItem('twilioChatToken', resp.data.token);
+                localStorage.setItem('twilioChatUsername', resp.data.username);
+
                 location.href = '/pages/chat.html';
             })
             .catch(() => {

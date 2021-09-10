@@ -162,6 +162,7 @@ html, body {
     background: white;
     border-bottom: 1px solid lightgrey;
     align-items: center;
+    padding-right: .7em;
 }
 
 #chat-title {

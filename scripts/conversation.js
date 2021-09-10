@@ -1,5 +1,3 @@
-window.twilioChat = window.twilioChat || {};
-
 function createConversation() {
     let convoForm = document.getElementById('convoForm');
     let formData = new FormData(convoForm);
@@ -18,11 +16,12 @@ function createConversation() {
         url: '/api/conversations',
         baseURL: 'http://localhost:8000',
         method: 'post',
-        withCredentials: true,
         data: body
     })
-        .then(() => {
-            window.twilioChat.username = body.username;
+        .then(resp => {
+            localStorage.setItem('twilioChatToken', resp.data.token);
+            localStorage.setItem('twilioChatUsername', resp.data.username);
+
             location.href = '/pages/chat.html';
         })
         .catch(() => {
