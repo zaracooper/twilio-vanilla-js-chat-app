@@ -160,4 +160,14 @@ twilioDemo.chat.showError = (msg) => {
     document.getElementById('error-text').innerHTML = `There was a problem ${msg ? msg : 'fulfilling your request'}.`;
 };
 
+twilioDemo.chat.logout = (logoutButton) => {
+    logoutButton.disabled = true;
+    logoutButton.style.cursor = 'wait';
+
+    localStorage.removeItem('twilioChatToken');
+    localStorage.removeItem('twilioChatUsername');
+
+    location.href = '/pages/conversation.html';
+};
+
 twilioDemo.chat.initClient();
