@@ -144,24 +144,6 @@ async function inviteFriend() {
     }
 }
 
-function logout(logoutButton) {
-    logoutButton.disabled = true;
-    logoutButton.style.cursor = 'wait';
-
-    axios.request({
-        url: '/auth/token',
-        baseURL: 'http://localhost:8000',
-        method: 'delete',
-        withCredentials: true
-    })
-        .then(() => {
-            location.href = '/pages/conversation.html';
-        })
-        .catch(() => {
-            location.href = '/pages/error.html';
-        });
-}
-
 function hideError() {
     document.getElementById('error-message').style.display = 'none';
 }
