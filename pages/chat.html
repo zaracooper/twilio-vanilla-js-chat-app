@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <title>Chat: Twilio Chat App</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
+    <link rel="stylesheet" type="text/css" href="../styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/chat.css" />
+</head>
+
+<body>
+    <div id="error-message">
+        <p id="error-text"></p>
+        <button id="error-button" onclick="hideError(); return false">X</button>
+    </div>
+    <div class="container">
+        <div class="side">
+            <div>
+                <p class="title">Conversations</p>
+            </div>
+            <div id="side-nav">
+                <p id="loading-msg">Loading conversations...</p>
+            </div>
+        </div>
+        <div id="chat-area" class="main">
+            <div id="chat-nav">
+                <p id="chat-title" class="title">Chat</p>
+                <button id="invite-button" class="chat-button" onclick="inviteFriend();return false" disabled>
+                    Invite Friend
+                </button>
+                <button id="logout-button" class="chat-button" type="submit" onclick="logout(this);return false">
+                    Logout
+                </button>
+            </div>
+            <div id="loading-chat">
+                <h3>Loading messages...</h3>
+            </div>
+            <div id="messages">
+            </div>
+            <form id="message-input">
+                <textarea id="chat-message" name="chat-message"></textarea>
+                <button id="submitMessage" class="chat-button" type="submit" onclick="sendMessage();return false"
+                    disabled>
+                    <h3>Submit</h3>
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script src="../node_modules/@twilio/conversations/dist/twilio-conversations.min.js"></script>
+    <script src="../scripts/chat.js"></script>
+</footer>
+
+</html>

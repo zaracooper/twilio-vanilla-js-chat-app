@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title>Conversation: Twilio Chat App</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
+
+    <link rel="stylesheet" type="text/css" href="../styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/simple-page.css" />
+</head>
+
+<body>
+    <div class="card">
+        <p class="title">Start a Conversation</p>
+        <p class="subtitle">Enter the your username and a conversation title</p>
+        <form id="convoForm" class="centered-content">
+            <label class="input-label" for="convo-name">Conversation Title</label>
+            <input class="input" type="text" id="convo-name" name="conversationTitle">
+            <label class="input-label" for="username">Username</label>
+            <input class="input" type="text" id="username" name="username">
+            <button id="submitConvo" class="submit-button" type="submit"
+                onclick="createConversation();return false">Submit</button>
+        </form>
+    </div>
+</body>
+<footer>
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script src="../scripts/conversation.js"></script>
+</footer>

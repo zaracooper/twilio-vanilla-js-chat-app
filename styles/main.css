@@ -1,0 +1,70 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card, input {
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid lightgrey;
+}
+
+.card {
+    padding: 2em;
+    min-width: 40vw;
+    min-height: 40vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input {
+    min-height: 4.5vh;
+    min-width: 20vw;
+    font-size: 0.9em;
+    padding: .5em;
+}
+
+.title {
+    font-size: 2.1em;
+    margin: .4em 0 .2em 0;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 1em;
+    font-weight: 100;
+    color: grey;
+    margin: 0 0 .4em 0;
+}
+
+.input-label {
+    margin: 0.7em 0 0.4em 0;
+}
+
+.submit-button {
+    background: #212529;
+    color: white;
+    min-width: 8vw;
+    border-radius: 5px;
+    min-height: 3vh;
+    margin: 1em;
+    font-size: 1em;
+    padding: .5em;
+}
+
+.submit-button:hover {
+    background: blue;
+}
+
+.submit-button:disabled {
+    background-color: gray;
+    color: white;
+    cursor: wait;
+}
